@@ -1,0 +1,23 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "For your final project, you'll implement a course project that exhibits your mastery of the course materials.  This project gives you an opportunity to be creative and to pursue individual research and learning.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dchao1/final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dchao1/final-project/issues"
+  },
+  "homepage": "https://github.com/dchao1/final-project#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2"
+  }
+}
