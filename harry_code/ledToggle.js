@@ -87,6 +87,7 @@ boards.on("ready", function() {
         pin: 3,
         board: boardY
     }]);
+    /**
     var r = 0, y = 0;
     red[r].toggle();
     yellow[y].toggle();
@@ -110,4 +111,20 @@ boards.on("ready", function() {
     boardY.on("exit", function() {
         yellow.off();
     });
+    */
 });
+
+board.repl.inject({
+    red : red,
+    yellow : yellow
+});
+
+var toggleLED = function(color, number){
+    if(color === "red"){
+        red[color].toggle();
+    } else if (color === "yellow"){
+        yellow[color].toggle();
+    } else {
+        throw new Error("invalid color");
+    }
+};
