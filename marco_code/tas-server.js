@@ -127,13 +127,15 @@ boards.on("ready", function() {
     boardY.on("exit", function() {
         yellow.off();
     });
+
+    boards.repl.inject({
+    red : red,
+    yellow : yellow
+  });
     
 });
 
-boards.repl.inject({
-    red : red,
-    yellow : yellow
-});
+
 
 var toggleLED = function(color, number){
     if(color === "red"){
