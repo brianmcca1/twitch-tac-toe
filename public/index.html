@@ -24,19 +24,21 @@
                 <h2>node app.js should start this project.</h2>
                 <button class="btn btn-primary" onclick="testPost()">Test Button</button>
                 <script>
-                    //create an xmlhttp request to post test1
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", '66.189.31.132:8080/test', true);
+                    function testPost() {
+                        //create an xmlhttp request to post test1
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", '66.189.31.132:8080/test', true);
 
-                    //Send the proper header information along with the request
-                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        //Send the proper header information along with the request
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-                    xhr.onreadystatechange = function() { //Call a function when the state changes.
-                        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                            // Request finished. Do processing here.
+                        xhr.onreadystatechange = function() { //Call a function when the state changes.
+                            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                                // Request finished. Do processing here.
+                            }
                         }
+                        xhr.send("foo=bar&lorem=ipsum");
                     }
-                    xhr.send("foo=bar&lorem=ipsum");
                 </script>
             </div>
             <div class="col-md-3"></div>
