@@ -11,6 +11,10 @@ app.get('/', function (req, res) {
   res.send("Hi");
 })
 
+app.get('/test', function (req, res){
+  res.send("Test1");
+})
+
 app.listen(port, '0.0.0.0', function () {
   console.log('Example app listening on port: ' + port + ' !');
 })
