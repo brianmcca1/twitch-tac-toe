@@ -60,7 +60,37 @@ class Board extends React.Component {
     //event.preventDefault();
     //document.getElementById('heading').scrollIntoView();
     //this.setState({ type: 'info', message: 'Sending...' }, this.sendFormData);
-
+    
+    var invocation = new XMLHttpRequest();
+    var url = 'http://66.189.31.132:8080';
+    var invocation = new XMLHttpRequest();
+    var url = 'http://66.189.31.132:8080/posttest';
+    if (invocation) {
+      invocation.open('POST', url, true);
+      var setstring;
+      invocation.onreadystatechange = function() {
+          // Ready state 4 means the request is done
+          if (invocation.readyState === 4) {
+              // 200 is a successful return
+              if (invocation.status === 200) {
+                  //alert(invocation.responseText); // 'This is the returned text.'
+                  invocation.open("POST", "/red0", true);
+                  if (_this.state.xIsNext){
+                      setstring = "Color=Red &Square=" + i
+                      alert("sent post with red "+ i)
+                  }
+                  else if (!_this.state.xIsNext) {
+                      setstring ="Color=Yellow &Square=" +i
+                      alert("sent post with yellow "+i)
+                  }
+              } else {
+                  alert('Error: ' + invocation.status); // An error occurred during the request
+              }
+          }
+      };
+      invocation.send(setstring);
+  }
+  
 
     const squares = this.state.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
