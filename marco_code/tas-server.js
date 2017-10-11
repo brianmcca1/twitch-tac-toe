@@ -3,6 +3,8 @@
 // Author: Marco Duran
 const express = require('express')
 const app = express()
+var five = require("johnny-five")
+
 app.use(express.static('public'), function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -10,6 +12,138 @@ app.use(express.static('public'), function(req, res, next) {
 });
 
 const port = 8080;
+
+var ports = [{
+        id: "R",
+        port: "COM3"
+    },
+    {
+        id: "Y",
+        port: "COM4"
+    }
+];
+
+
+var boards = new five.Boards(ports);
+
+boards.on("ready", function() {
+    var boardR = boards.byId("R");
+    var boardY = boards.byId("Y");
+    var red = new five.Leds([{
+        // Red 0
+        pin: 13, 
+        board: boardR
+    }, {
+        // Red 1
+        pin: 3,
+        board: boardR
+    }, {
+        // Red 2
+        pin: 12,
+        board: boardR
+    }, {
+        // Red 3
+        pin: 11,
+        board: boardR
+    }, {
+        // Red 4
+        pin: 10,
+        board: boardR
+    }, {
+        // Red 5
+        pin: 8,
+        board: boardR
+    }, {
+        // Red 6
+        pin: 7,
+        board: boardR
+    }, {
+        // Red 7
+        pin: 5,
+        board: boardR
+    }, {
+        // Red 8
+        pin: 2,
+        board: boardR
+    }]);
+    var yellow = new five.Leds([{
+        // Yellow 0
+        pin: 13,
+        board: boardY
+    }, {
+        // Yellow 1
+        pin: 12,
+        board: boardY
+    }, {
+        // Yellow 2
+        pin: 11,
+        board: boardY
+    }, {
+        // Yellow 3
+        pin: 10,
+        board: boardY
+    }, {
+        // Yellow 4
+        pin: 8,
+        board: boardY
+    }, {
+        // Yellow 5
+        pin: 7,
+        board: boardY
+    }, {
+        // Yellow 6
+        pin: 5,
+        board: boardY
+    }, {
+        // Yellow 7
+        pin: 4,
+        board: boardY
+    }, {
+        // Yellow 8
+        pin: 3,
+        board: boardY
+    }]);
+    /**
+    var r = 0, y = 0;
+    red[r].toggle();
+    yellow[y].toggle();
+
+    boardR.loop(50, function() {
+        red[r++].toggle();
+        if (r === red.length) r = 0;
+        red[r].toggle();
+    });
+
+    boardY.loop(50, function() {
+        yellow[y++].toggle();
+        if (y === yellow.length) y = 0;
+        yellow[y].toggle();
+    });
+    */
+    boardR.on("exit", function() {
+        red.off();
+    });
+
+    boardY.on("exit", function() {
+        yellow.off();
+    });
+    
+});
+
+boards.repl.inject({
+    red : red,
+    yellow : yellow
+});
+
+var toggleLED = function(color, number){
+    if(color === "red"){
+        red[color].toggle();
+    } else if (color === "yellow"){
+        yellow[color].toggle();
+    } else {
+        throw new Error("invalid color");
+    }
+};
 
 app.get('/', function (req, res) {
   res.send("Hi");
@@ -39,6 +173,7 @@ app.post('/posttest', function(req, res){
  * 
  */
 app.post('/red0', function(req, res){
+  toggleLED("red", 0);
   res.send("Color: Red, Square: 0");
 })
  /** Board State: red1
@@ -52,7 +187,8 @@ app.post('/red0', function(req, res){
  * 
  */
 app.post('/red1', function(req, res){
-  res.send("Color: Red, Square: 0");
+  toggleLED("red", 1);
+  res.send("Color: Red, Square: 1");
 })
  /** Board State: red2
  * 
@@ -65,6 +201,7 @@ app.post('/red1', function(req, res){
  * 
  */
 app.post('/red2', function(req, res){
+  toggleLED("red", 2);
   res.send("Color: Red, Square: 2");
 })
  /** Board State: red3
@@ -78,6 +215,7 @@ app.post('/red2', function(req, res){
  * 
  */
 app.post('/red3', function(req, res){
+  toggleLED("red", 3);
   res.send("Color: Red, Square: 3");
 })
  /** Board State: red4
@@ -91,6 +229,7 @@ app.post('/red3', function(req, res){
  * 
  */
 app.post('/red4', function(req, res){
+  toggleLED("red", 4);
   res.send("Color: Red, Square: 4");
 })
  /** Board State: red5
@@ -104,6 +243,7 @@ app.post('/red4', function(req, res){
  * 
  */
 app.post('/red5', function(req, res){
+  toggleLED("red", 5);
   res.send("Color: Red, Square: 5");
 })
  /** Board State: red6
@@ -117,6 +257,7 @@ app.post('/red5', function(req, res){
  * 
  */
 app.post('/red6', function(req, res){
+  toggleLED("red", 6);
   res.send("Color: Red, Square: 6");
 })
  /** Board State: red7
@@ -130,6 +271,7 @@ app.post('/red6', function(req, res){
  * 
  */
 app.post('/red7', function(req, res){
+  toggleLED("red", 7);
   res.send("Color: Red, Square: 7");
 })
  /** Board State: red8
@@ -143,6 +285,7 @@ app.post('/red7', function(req, res){
  * 
  */
 app.post('/red8', function(req, res){
+  toggleLED("red", 8);
   res.send("Color: Red, Square: 8");
 })
  /** Board State: yellow0
@@ -156,6 +299,7 @@ app.post('/red8', function(req, res){
  * 
  */
 app.post('/yellow0', function(req, res){
+  toggleLED("yellow", 0);
   res.send("Color: yellow, Square: 0");
 })
  /** Board State: yellow1
@@ -169,6 +313,7 @@ app.post('/yellow0', function(req, res){
  * 
  */
 app.post('/yellow1', function(req, res){
+  toggleLED("yellow", 1);
   res.send("Color: Yellow, Square: 1");
 })
  /** Board State: yellow2
@@ -182,6 +327,7 @@ app.post('/yellow1', function(req, res){
  * 
  */
 app.post('/yellow2', function(req, res){
+  toggleLED("yellow", 2);
   res.send("Color: Yellow, Square: 2");
 })
  /** Board State: yellow3
@@ -195,6 +341,7 @@ app.post('/yellow2', function(req, res){
  * 
  */
 app.post('/yellow3', function(req, res){
+  toggleLED("yellow", 3);
   res.send("Color: Yellow, Square: 3");
 })
  /** Board State: yellow4
@@ -208,6 +355,7 @@ app.post('/yellow3', function(req, res){
  * 
  */
 app.post('/yellow4', function(req, res){
+  toggleLED("yellow", 4);
   res.send("Color: Yellow, Square: 4");
 })
  /** Board State: yellow5
@@ -221,6 +369,7 @@ app.post('/yellow4', function(req, res){
  * 
  */
 app.post('/yellow5', function(req, res){
+  toggleLED("yellow", 5);
   res.send("Color: Yellow, Square: 5");
 })
  /** Board State: yellow6
@@ -234,6 +383,7 @@ app.post('/yellow5', function(req, res){
  * 
  */
 app.post('/yellow6', function(req, res){
+  toggleLED("yellow", 6);
   res.send("Color: Yellow, Square: 6");
 })
  /** Board State: yellow7
@@ -247,6 +397,7 @@ app.post('/yellow6', function(req, res){
  * 
  */
 app.post('/yellow7', function(req, res){
+  toggleLED("yellow", 7);
   res.send("Color: Yellow, Square: 7");
 })
  /** Board State: yellow8
@@ -260,6 +411,7 @@ app.post('/yellow7', function(req, res){
  * 
  */
 app.post('/yellow8', function(req, res){
+  toggleLED("yellow", 8);
   res.send("Color: Yellow, Square: 8");
 })
 app.listen(port, '0.0.0.0', function () {
