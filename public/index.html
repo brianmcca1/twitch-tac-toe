@@ -32,8 +32,6 @@
                     function callOtherDomain() {
                         if (invocation) {
                             invocation.open('GET', url, true);
-                            invocation.setRequestHeader('X-PINGOTHER', 'pingpong');
-                            invocation.setRequestHeader('Content-Type', 'application/xml');
                             invocation.onreadystatechange = function() {
                                 // Ready state 4 means the request is done
                                 if (invocation.readyState === 4) {
