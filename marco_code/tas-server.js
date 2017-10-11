@@ -162,6 +162,11 @@ boards.on("ready", function() {
         res.send("Post test success!");
     })
 
+    app.post('/reset', function(req, res) {
+        red.off();
+        yellow.off();
+    })
+
     //Handle post requests to take in game input
     // 0 is red, 1 is yellow
     //post request convention is as follow: "/colorSquare#"
