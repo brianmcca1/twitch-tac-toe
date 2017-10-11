@@ -103,7 +103,7 @@ boards.on("ready", function() {
         if (y === yellow.length) y = 0;
         yellow[y].toggle();
     });
-
+    */
     boardR.on("exit", function() {
         red.off();
     });
@@ -111,10 +111,10 @@ boards.on("ready", function() {
     boardY.on("exit", function() {
         yellow.off();
     });
-    */
+    
 });
 
-board.repl.inject({
+boards.repl.inject({
     red : red,
     yellow : yellow
 });
