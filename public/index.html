@@ -26,14 +26,13 @@
 
                 <script type="text/javascript">
                     //from mdn: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
-                    var invocation = new XMLHttpRequest();
-                    var url = 'http://66.189.31.132:8080';
 
-                    function callOtherDomain() {
+                    function testGet() {
+                        var invocation = new XMLHttpRequest();
+                        var url = 'http://66.189.31.132:8080';
+
                         if (invocation) {
                             invocation.open('GET', url, true);
-                            invocation.setRequestHeader('X-PINGOTHER', 'pingpong');
-                            invocation.setRequestHeader('Content-Type', 'application/xml');
                             invocation.onreadystatechange = function() {
                                 // Ready state 4 means the request is done
                                 if (invocation.readyState === 4) {
@@ -50,7 +49,36 @@
                     }
                 </script>
 
-                <button class="btn btn-primary" onclick="callOtherDomain()">Test Button</button>
+                <button class="btn btn-primary" onclick="testGet()">Test GET Button</button>
+
+
+                <!-- Test Post Request Button Script -->
+                <script type="text/javascript">
+                    //from mdn: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+
+
+                    function testPost() {
+                        var invocation = new XMLHttpRequest();
+                        var url = 'http://66.189.31.132:8080/posttest';
+                        if (invocation) {
+                            invocation.open('POST', url, true);
+                            invocation.onreadystatechange = function() {
+                                // Ready state 4 means the request is done
+                                if (invocation.readyState === 4) {
+                                    // 200 is a successful return
+                                    if (invocation.status === 200) {
+                                        alert(invocation.responseText); // 'This is the returned text.'
+                                    } else {
+                                        alert('Error: ' + invocation.status); // An error occurred during the request
+                                    }
+                                }
+                            };
+                            invocation.send();
+                        }
+                    }
+                </script>
+                <button class="btn btn-primary" onclick="testPost()">Test POST Button</button>
+
             </div>
             <div class="col-md-3"></div>
         </div>
