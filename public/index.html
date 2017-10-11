@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -22,24 +23,34 @@
             <div class="col-md-7">
                 <h1>Hello, this is for the final project.</h1>
                 <h2>node app.js should start this project.</h2>
-                <button class="btn btn-primary" onclick="testPost()">Test Button</button>
-                <script>
-                    function testPost() {
-                        //create an xmlhttp request to post test1
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", '66.189.31.132:8080/test', true);
 
-                        //Send the proper header information along with the request
-                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                <script type="text/javascript">
+                    //from mdn: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+                    var invocation = new XMLHttpRequest();
+                    var url = 'http://66.189.31.132:8080';
 
-                        xhr.onreadystatechange = function() { //Call a function when the state changes.
-                            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                                // Request finished. Do processing here.
-                            }
+                    function callOtherDomain() {
+                        if (invocation) {
+                            invocation.open('GET', url, true);
+                            invocation.setRequestHeader('X-PINGOTHER', 'pingpong');
+                            invocation.setRequestHeader('Content-Type', 'application/xml');
+                            invocation.onreadystatechange = function() {
+                                // Ready state 4 means the request is done
+                                if (invocation.readyState === 4) {
+                                    // 200 is a successful return
+                                    if (invocation.status === 200) {
+                                        alert(invocation.responseText); // 'This is the returned text.'
+                                    } else {
+                                        alert('Error: ' + invocation.status); // An error occurred during the request
+                                    }
+                                }
+                            };
+                            invocation.send();
                         }
-                        xhr.send("foo=bar&lorem=ipsum");
                     }
                 </script>
+
+                <button class="btn btn-primary" onclick="callOtherDomain()">Test Button</button>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -53,6 +64,10 @@
         </div>
     </div>
 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </body>
 
 </html>
