@@ -195,7 +195,7 @@ boards.on("ready", function() {
 
     app.get('/win', function(req, res){
       winCondition();
-    }
+    })
 
     //Handle post requests to take in game input
     // 0 is red, 1 is yellow
