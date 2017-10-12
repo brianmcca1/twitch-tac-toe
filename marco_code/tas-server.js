@@ -187,6 +187,7 @@ boards.on("ready", function() {
     app.get('/reset', function(req, res) {
         red.off();
         yellow.off();
+        console.log("RESET CALLED");
     })
 
     app.get('/win', function(req, res){
