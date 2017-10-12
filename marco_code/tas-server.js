@@ -150,7 +150,7 @@ boards.on("ready", function() {
         }
     };
 
-    async var winCondition = function() {
+    var winCondition = function() {
       var finished = false;
       var r = 0, y = 0;
       setTimeout(function() {
