@@ -162,9 +162,10 @@ boards.on("ready", function() {
         res.send("Post test success!");
     })
 
-    app.post('/reset', function(req, res) {
+    app.get('/reset', function(req, res) {
         red.off();
         yellow.off();
+        console.log("RESET CALLED");
     })
 
     //Handle post requests to take in game input
