@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
@@ -24,8 +25,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-  </head>
-  <body>
+</head>
+
+<body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
@@ -38,15 +40,15 @@
     white-space: pre-wrap;
     "></div>
     <div id="root2">ffefef</div>
-<br><br>
-    
+    <br><br>
+
     <div>
-      <div>
-          <!-- <iframe frameborder="0" scrolling="no" src="http://player.twitch.tv/?channel=twitchasketchwpi&muted=true" height="500" width="720" allowfullscreen="true">
+        <div>
+            <iframe frameborder="0" scrolling="no" src="http://player.twitch.tv/?channel=twitchasketchwpi&muted=true" height="500" width="720" allowfullscreen="true">
     </iframe>
-          <iframe frameborder="0" scrolling="yes" id="twitchasketchwpi" src="http://www.twitch.tv/twitchasketchwpi/chat" height="500" width="300">
+            <!-- <iframe frameborder="0" scrolling="yes" id="twitchasketchwpi" src="http://www.twitch.tv/twitchasketchwpi/chat" height="500" width="300">
     </iframe> -->
-      </div>
+        </div>
     </div>
 
     <!--<div id="root"></div>-->
@@ -60,49 +62,50 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-  <script>
-    
-      function testGet() {
+<script>
+    function testGet() {
         var url = 'http://130.215.219.59:8080/';
         var invocation = new XMLHttpRequest();
-          if (invocation) {
-              invocation.open('GET', url, true);
-              invocation.onreadystatechange = function() {
-                  // Ready state 4 means the request is done
-                  if (invocation.readyState === 4) {
-                      // 200 is a successful return
-                      if (invocation.status === 200) {
-                          alert(invocation.responseText); // 'This is the returned text.'
-                      } else {
-                          alert('Error: ' + invocation.status); // An error occurred during the request
-                      }
-                  }
-              };
-              invocation.send();
-          }
-      }
-      function resetBoard(){
+        if (invocation) {
+            invocation.open('GET', url, true);
+            invocation.onreadystatechange = function() {
+                // Ready state 4 means the request is done
+                if (invocation.readyState === 4) {
+                    // 200 is a successful return
+                    if (invocation.status === 200) {
+                        alert(invocation.responseText); // 'This is the returned text.'
+                    } else {
+                        alert('Error: ' + invocation.status); // An error occurred during the request
+                    }
+                }
+            };
+            invocation.send();
+        }
+    }
+
+    function resetBoard() {
         var invocation = new XMLHttpRequest();
         var url = 'http://130.215.219.59:8080/reset';
         if (invocation) {
-          invocation.open('GET', url, true);
-          console.log('get opened');
-          invocation.onreadystatechange = function() {
-            if (invocation.readyState === 4) {
-              if (invocation.status === 200) {
-                alert(invocation.responseText); 
-              }else {
-                alert('Error: ' + invocation.status); // An error occurred during the request
-              }
-            }
-          };
-          invocation.send();
+            invocation.open('GET', url, true);
+            console.log('get opened');
+            invocation.onreadystatechange = function() {
+                if (invocation.readyState === 4) {
+                    if (invocation.status === 200) {
+                        alert(invocation.responseText);
+                    } else {
+                        alert('Error: ' + invocation.status); // An error occurred during the request
+                    }
+                }
+            };
+            invocation.send();
         }
-      }
+    }
+
     function testPost() {
         if (invocation) {
             invocation.open('POST', url, true);
@@ -122,33 +125,33 @@
     }
 
     window.addEventListener('mousedown', function(e) {
-      document.body.classList.add('mouse-navigation');
-      document.body.classList.remove('kbd-navigation');
+        document.body.classList.add('mouse-navigation');
+        document.body.classList.remove('kbd-navigation');
     });
     window.addEventListener('keydown', function(e) {
-      if (e.keyCode === 9) {
-        document.body.classList.add('kbd-navigation');
-        document.body.classList.remove('mouse-navigation');
-      }
+        if (e.keyCode === 9) {
+            document.body.classList.add('kbd-navigation');
+            document.body.classList.remove('mouse-navigation');
+        }
     });
     window.addEventListener('click', function(e) {
-      if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
-        e.preventDefault();
-      }
+        if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+            e.preventDefault();
+        }
     });
     window.onerror = function(message, source, line, col, error) {
-      var text = error ? error.stack || error : message + ' (at ' + source + ':' + line + ':' + col + ')';
-      errors.textContent += text + '\n';
-      errors.style.display = '';
+        var text = error ? error.stack || error : message + ' (at ' + source + ':' + line + ':' + col + ')';
+        errors.textContent += text + '\n';
+        errors.style.display = '';
     };
     console.error = (function(old) {
-      return function error() {
-        errors.textContent += Array.prototype.slice.call(arguments).join(' ') + '\n';
-        errors.style.display = '';
-        old.apply(this, arguments);
-      }
+        return function error() {
+            errors.textContent += Array.prototype.slice.call(arguments).join(' ') + '\n';
+            errors.style.display = '';
+            old.apply(this, arguments);
+        }
     })(console.error);
-    </script>
+</script>
 
 
 </html>

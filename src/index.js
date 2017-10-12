@@ -4,5 +4,5 @@ import './index.css';
 import Game from './ttt';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Game />, document.getElementById('root2'));
-registerServiceWorker();
+ReactDOM.render( < Game / > , document.getElementById('root2'));
+//registerServiceWorker();
