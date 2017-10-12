@@ -108,12 +108,16 @@ class Board extends React.Component {
     //document.getElementById('heading').scrollIntoView();
     //this.setState({ type: 'info', message: 'Sending...' }, this.sendFormData);
     var _this = this;
+    const squares = this.state.squares.slice();
+    if(squares[i] != null){
+      return;
+    }
     if(this.state.xIsNext){
       this.sendRequest("red" + i)
     }else{
       this.sendRequest("yellow" + i);
     }
-    const squares = this.state.squares.slice();
+    
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
