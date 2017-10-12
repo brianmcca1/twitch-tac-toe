@@ -193,7 +193,7 @@ boards.on("ready", function() {
         console.log("RESET CALLED");
     })
 
-    app.get('/win', function(req, res){
+    app.post('/win', function(req, res){
       console.log("We got a win condition");
       winCondition();
     })
