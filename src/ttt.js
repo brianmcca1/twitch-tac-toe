@@ -68,9 +68,9 @@ class Board extends React.Component {
             if (invocation.readyState === 4) {
                 // 200 is a successful return
                 if (invocation.status === 200) {
-                    alert("Success: " + arg);
+                    //alert("Success: " + arg);
                 } else {
-                    alert('Error: ' + invocation.status); // An error occurred during the request
+                    //alert('Error: ' + invocation.status); // An error occurred during the request
                 }
             }
         };
@@ -85,9 +85,9 @@ class Board extends React.Component {
       invocation.onreadystatechange = function() {
         if (invocation.readyState === 4) {
           if (invocation.status === 200) {
-            alert(invocation.responseText); 
+            //alert(invocation.responseText); 
           }else {
-            alert('Error: ' + invocation.status); // An error occurred during the request
+            //alert('Error: ' + invocation.status); // An error occurred during the request
           }
         }
       };
