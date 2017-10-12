@@ -150,27 +150,28 @@ boards.on("ready", function() {
         }
     };
 
-    var winCondition = function() {
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function winCondition() {
       var finished = false;
       var r = 0, y = 0;
       setTimeout(function() {
         finished = true;
+
         red.off();
         yellow.off();
       }, 5000);
       while(!finished){
-        setTimeout(function(){
-          red[r].toggle();
-          yellow[y].toggle();
-          red[r++].toggle();
-          if (r === red.length) r = 0;
-          red[r].toggle();
-          yellow[y++].toggle();
-          if (y === yellow.length) y = 0;
-          yellow[y].toggle();
-        }, 50);
-        
-
+        red[r].toggle();
+        yellow[y].toggle();
+        red[r++].toggle();
+        if (r === red.length) r = 0;
+        red[r].toggle();
+        yellow[y++].toggle();
+        if (y === yellow.length) y = 0;
+        yellow[y].toggle();
+        await sleep(50);
       }
 
     }
