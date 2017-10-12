@@ -194,6 +194,7 @@ boards.on("ready", function() {
     })
 
     app.get('/win', function(req, res){
+      console.log("We got a win condition");
       winCondition();
     })
 
