@@ -16,6 +16,8 @@ function Square(props) {
 class Board extends React.Component {
   constructor() {
     super();
+    this.sendRequest = this.sendRequest.bind(this)
+    this.resetBoard = this.resetBoard.bind(this)
     this.state = {
       squares: Array(9).fill(null),
       xIsNext: true,
@@ -37,7 +39,7 @@ class Board extends React.Component {
     // Send the form data.
     
     var xmlhttp = new XMLHttpRequest();
-    var _this = this;
+    
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState === 4) {
         var response = JSON.parse(xmlhttp.responseText);
@@ -55,43 +57,62 @@ class Board extends React.Component {
     
   }
 */
-
+  sendRequest(arg){
+    var invocation = new XMLHttpRequest();
+    var url = 'http://130.215.219.59:8080/' + arg;
+    if (invocation) {
+        invocation.open('POST', url, true);
+        var setstring;
+        invocation.onreadystatechange = function() {
+            // Ready state 4 means the request is done
+            if (invocation.readyState === 4) {
+                // 200 is a successful return
+                if (invocation.status === 200) {
+                    alert("Success: " + arg);
+                } else {
+                    alert('Error: ' + invocation.status); // An error occurred during the request
+                }
+            }
+        };
+        invocation.send(setstring);
+    }
+  }
+  resetBoard(){
+    var invocation = new XMLHttpRequest();
+    var url = 'http://130.215.219.59:8080/reset';
+    if (invocation) {
+      invocation.open('GET', url, true);
+      invocation.onreadystatechange = function() {
+        if (invocation.readyState === 4) {
+          if (invocation.status === 200) {
+            alert(invocation.responseText); 
+          }else {
+            alert('Error: ' + invocation.status); // An error occurred during the request
+          }
+        }
+      };
+      invocation.send();
+      var squares = this.state.squares;
+      for (var x = 0; x <= 9; x++){
+        squares[x] = ''
+      }
+      this.setState({
+        squares: Array(9).fill(null),
+        xIsNext: this.state.xIsNext,
+        message: this.state.message
+      });
+    }
+  }
   handleClick(i) {
     //event.preventDefault();
     //document.getElementById('heading').scrollIntoView();
     //this.setState({ type: 'info', message: 'Sending...' }, this.sendFormData);
-    
-    var invocation = new XMLHttpRequest();
-    var url = 'http://66.189.31.132:8080';
-    var invocation = new XMLHttpRequest();
-    var url = 'http://66.189.31.132:8080/posttest';
-    if (invocation) {
-      invocation.open('POST', url, true);
-      var setstring;
-      invocation.onreadystatechange = function() {
-          // Ready state 4 means the request is done
-          if (invocation.readyState === 4) {
-              // 200 is a successful return
-              if (invocation.status === 200) {
-                  //alert(invocation.responseText); // 'This is the returned text.'
-                  invocation.open("POST", "/red0", true);
-                  if (_this.state.xIsNext){
-                      setstring = "Color=Red &Square=" + i
-                      alert("sent post with red "+ i)
-                  }
-                  else if (!_this.state.xIsNext) {
-                      setstring ="Color=Yellow &Square=" +i
-                      alert("sent post with yellow "+i)
-                  }
-              } else {
-                  alert('Error: ' + invocation.status); // An error occurred during the request
-              }
-          }
-      };
-      invocation.send(setstring);
-  }
-  
-
+    var _this = this;
+    if(this.state.xIsNext){
+      this.sendRequest("red" + i)
+    }else{
+      this.sendRequest("yellow" + i);
+    }
     const squares = this.state.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -102,11 +123,6 @@ class Board extends React.Component {
       this.sendFormData
     );
   }
-
-
-
-
-  
   renderSquare(i) {
     return (
       <Square
@@ -144,6 +160,7 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        <button class="btn btn-primary" onClick={this.resetBoard}>Reset board</button>
       </div>
     );
   }
