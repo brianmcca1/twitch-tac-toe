@@ -19,22 +19,23 @@ ol, ul {
 }
 
 .status {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
 .square {
   background: #fff;
-  border: 1px solid #999;
+  border: 2px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 50px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 90px;
+  height: 90px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 90px;
 }
 
 .square:focus {
@@ -52,4 +53,7 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+}
+.btn-primary {
+  margin-top: 20px;
 }
