@@ -159,15 +159,18 @@ boards.on("ready", function() {
         yellow.off();
       }, 5000);
       while(!finished){
-        red[r].toggle();
-        yellow[y].toggle();
-        red[r++].toggle();
-        if (r === red.length) r = 0;
-        red[r].toggle();
-        yellow[y++].toggle();
-        if (y === yellow.length) y = 0;
-        yellow[y].toggle();
-        await sleep(50);
+        setTimeout(function(){
+          red[r].toggle();
+          yellow[y].toggle();
+          red[r++].toggle();
+          if (r === red.length) r = 0;
+          red[r].toggle();
+          yellow[y++].toggle();
+          if (y === yellow.length) y = 0;
+          yellow[y].toggle();
+        }, 50);
+        
+
       }
 
     }
