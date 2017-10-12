@@ -150,6 +150,28 @@ boards.on("ready", function() {
         }
     };
 
+    async var winCondition = function() {
+      var finished = false;
+      var r = 0, y = 0;
+      setTimeout(function() {
+        finished = true;
+        red.off();
+        yellow.off();
+      }, 5000);
+      while(!finished){
+        red[r].toggle();
+        yellow[y].toggle();
+        red[r++].toggle();
+        if (r === red.length) r = 0;
+        red[r].toggle();
+        yellow[y++].toggle();
+        if (y === yellow.length) y = 0;
+        yellow[y].toggle();
+        await sleep(50);
+      }
+
+    }
+
     app.get('/', function(req, res) {
         res.send("Hi");
     })
@@ -162,10 +184,14 @@ boards.on("ready", function() {
         res.send("Post test success!");
     })
 
-    app.post('/reset', function(req, res) {
+    app.get('/reset', function(req, res) {
         red.off();
         yellow.off();
     })
+
+    app.get('/win', function(req, res){
+      winCondition();
+    }
 
     //Handle post requests to take in game input
     // 0 is red, 1 is yellow
